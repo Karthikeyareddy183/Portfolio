@@ -156,7 +156,7 @@ export default function Contact() {
                 <FadeIn delay={0.6}>
                     <div className="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 text-center">
                         <p className="text-slate-600 dark:text-slate-400">
-                            &copy; {new Date().getFullYear()} {personalInfo.name}. Built with Next.js, TypeScript, Tailwind CSS, and Framer Motion.
+                            &copy; {new Date().getFullYear()} {personalInfo.name}. Built with ❤️
                         </p>
                     </div>
                 </FadeIn>
