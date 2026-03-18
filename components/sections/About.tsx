@@ -1,42 +1,47 @@
 import FadeIn from "../animations/FadeIn";
-import { personalInfo, achievements, languages } from "@/lib/constants";
-import { Code, Database, Cloud, Cpu } from "lucide-react";
+import { personalInfo, achievements, languages, SECTION_IDS } from "@/lib/constants";
+import { Bot, Database, Cloud, BrainCircuit } from "lucide-react";
+import SectionHeader from "@/components/ui/SectionHeader";
 
 const highlights = [
     {
-        icon: <Code className="w-6 h-6" />,
-        title: "Backend Development",
-        description: "Building scalable Python services with FastAPI and Flask",
+        icon: "brain",
+        title: "LLM Systems",
+        description: "Multi-agent RAG pipelines, prompt engineering, and fine-tuning transformers",
     },
     {
-        icon: <Cpu className="w-6 h-6" />,
-        title: "AI/ML Engineering",
-        description: "Developing ML models with TensorFlow, PyTorch, and LLMs",
+        icon: "bot",
+        title: "Agentic AI",
+        description: "Orchestrating AI agents with CrewAI, LangChain, and LangGraph",
     },
     {
-        icon: <Database className="w-6 h-6" />,
-        title: "Data Engineering",
-        description: "Working with vector databases and data pipelines",
+        icon: "database",
+        title: "AI Backend",
+        description: "Async FastAPI backends with sub-200ms latency and vector search",
     },
     {
-        icon: <Cloud className="w-6 h-6" />,
-        title: "Cloud & DevOps",
-        description: "CI/CD pipelines, Docker, and Azure deployments",
+        icon: "cloud",
+        title: "MLOps & Cloud",
+        description: "Docker, CI/CD, model deployment on Azure and GCP",
     },
 ];
 
+const iconMap: Record<string, React.ReactNode> = {
+    brain: <BrainCircuit className="w-6 h-6" />,
+    bot: <Bot className="w-6 h-6" />,
+    database: <Database className="w-6 h-6" />,
+    cloud: <Cloud className="w-6 h-6" />,
+};
+
 export default function About() {
     return (
-        <section id="about" className="section-padding bg-white dark:bg-slate-900">
+        <section id={SECTION_IDS.about} className="section-padding bg-white dark:bg-slate-900">
             <div className="container-custom">
-                <FadeIn>
-                    <h2 className="text-4xl md:text-5xl font-heading font-bold text-center mb-4">
-                        About <span className="text-gradient">Me</span>
-                    </h2>
-                    <p className="text-center text-slate-600 dark:text-slate-400 mb-16 max-w-2xl mx-auto">
-                        Passionate about building intelligent systems that make a difference
-                    </p>
-                </FadeIn>
+                <SectionHeader
+                    title="About"
+                    highlight="Me"
+                    subtitle="Specialized in building production AI systems that solve real-world problems"
+                />
 
                 <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
                     {/* Bio */}
@@ -46,8 +51,8 @@ export default function About() {
                                 {personalInfo.bio}
                             </p>
                             <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
-                                Currently working at <span className="text-primary-600 dark:text-primary-400 font-semibold">Craftech 360</span> as a Jr Backend Developer,
-                                where I own backend development for Cheeko AI and manage deployments supporting 1,000+ active users.
+                                Currently at <span className="text-primary-600 dark:text-primary-400 font-semibold">Craftech 360</span> as a Jr. Backend Developer,
+                                leading backend development for Cheeko AI — building scalable Python services and RESTful APIs supporting 100+ active users.
                             </p>
                             <div className="flex flex-wrap gap-2">
                                 {languages.map((lang, index) => (
@@ -68,10 +73,10 @@ export default function About() {
                             {highlights.map((item, index) => (
                                 <div
                                     key={index}
-                                    className="p-6 glass dark:glass-dark rounded-xl hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-300 group"
+                                    className="p-6 glass dark:glass-dark rounded-xl hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-300 group cursor-pointer"
                                 >
                                     <div className="text-primary-600 dark:text-primary-400 mb-3 group-hover:scale-110 transition-transform">
-                                        {item.icon}
+                                        {iconMap[item.icon]}
                                     </div>
                                     <h3 className="font-heading font-semibold mb-2 text-slate-900 dark:text-slate-100">
                                         {item.title}

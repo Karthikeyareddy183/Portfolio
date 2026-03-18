@@ -5,15 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 import { cn } from "@/lib/utils";
+import { SECTION_IDS } from "@/lib/constants";
 
-const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Experience", href: "#experience" },
-    { name: "Projects", href: "#projects" },
-    { name: "Skills", href: "#skills" },
-    { name: "Contact", href: "#contact" },
-];
+const navItems = Object.entries(SECTION_IDS).map(([key, id]) => ({
+    name: key.charAt(0).toUpperCase() + key.slice(1),
+    href: `#${id}`,
+}));
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);

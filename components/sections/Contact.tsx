@@ -1,23 +1,43 @@
 "use client";
 
 import FadeIn from "../animations/FadeIn";
-import { personalInfo, socialLinks, education, certifications } from "@/lib/constants";
+import { personalInfo, socialLinks, education, certifications, SECTION_IDS } from "@/lib/constants";
 import { Mail, MapPin, Phone, Download, GraduationCap, Award } from "lucide-react";
-import { motion } from "framer-motion";
-import SocialIcon from "@/components/ui/SocialIcon";
+import SectionHeader from "@/components/ui/SectionHeader";
+import SocialLinks from "@/components/ui/SocialLinks";
+import type { LucideIcon } from "lucide-react";
+
+const emailLink = socialLinks.find((l) => l.icon === "mail");
+
+const contactItems: { icon: LucideIcon; label: string; value: string; href?: string }[] = [
+    {
+        icon: Mail,
+        label: "Email",
+        value: personalInfo.email,
+        href: emailLink?.url,
+    },
+    {
+        icon: Phone,
+        label: "Phone",
+        value: personalInfo.phone,
+        href: `tel:${personalInfo.phone.replace(/\s/g, "")}`,
+    },
+    {
+        icon: MapPin,
+        label: "Location",
+        value: personalInfo.location,
+    },
+];
 
 export default function Contact() {
     return (
-        <section id="contact" className="section-padding bg-white dark:bg-slate-900">
+        <section id={SECTION_IDS.contact} className="section-padding bg-white dark:bg-slate-900">
             <div className="container-custom">
-                <FadeIn>
-                    <h2 className="text-4xl md:text-5xl font-heading font-bold text-center mb-4">
-                        Get In <span className="text-gradient">Touch</span>
-                    </h2>
-                    <p className="text-center text-slate-600 dark:text-slate-400 mb-16 max-w-2xl mx-auto">
-                        Let&apos;s build something amazing together
-                    </p>
-                </FadeIn>
+                <SectionHeader
+                    title="Get In"
+                    highlight="Touch"
+                    subtitle="Let's build something amazing together"
+                />
 
                 <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
                     {/* Contact Info */}
@@ -28,72 +48,43 @@ export default function Contact() {
                                     Contact <span className="text-gradient">Information</span>
                                 </h3>
                                 <div className="space-y-4">
-                                    <a
-                                        href={`https://mail.google.com/mail/?view=cm&to=${personalInfo.email}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center gap-4 p-4 glass dark:glass-dark rounded-lg hover:bg-slate-50 dark:hover:bg-white/5 transition-all group"
-                                    >
-                                        <div className="p-3 bg-gradient-to-r from-primary-500 to-accent-500 rounded-lg group-hover:scale-110 transition-transform">
-                                            <Mail className="w-5 h-5 text-white" />
-                                        </div>
-                                        <div>
-                                            <p className="text-sm text-slate-600 dark:text-slate-400">Email</p>
-                                            <p className="font-medium text-slate-900 dark:text-slate-100">{personalInfo.email}</p>
-                                        </div>
-                                    </a>
+                                    {contactItems.map((item) => {
+                                        const Icon = item.icon;
+                                        const content = (
+                                            <div className="flex items-center gap-4 p-4 glass dark:glass-dark rounded-lg hover:bg-slate-50 dark:hover:bg-white/5 transition-all group cursor-pointer">
+                                                <div className="p-3 bg-gradient-to-r from-primary-500 to-accent-500 rounded-lg group-hover:scale-110 transition-transform">
+                                                    <Icon className="w-5 h-5 text-white" />
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-slate-600 dark:text-slate-400">{item.label}</p>
+                                                    <p className="font-medium text-slate-900 dark:text-slate-100">{item.value}</p>
+                                                </div>
+                                            </div>
+                                        );
 
-                                    <a
-                                        href={`tel:${personalInfo.phone.replace(/\s/g, "")}`}
-                                        className="flex items-center gap-4 p-4 glass dark:glass-dark rounded-lg hover:bg-slate-50 dark:hover:bg-white/5 transition-all group"
-                                    >
-                                        <div className="p-3 bg-gradient-to-r from-primary-500 to-accent-500 rounded-lg group-hover:scale-110 transition-transform">
-                                            <Phone className="w-5 h-5 text-white" />
-                                        </div>
-                                        <div>
-                                            <p className="text-sm text-slate-600 dark:text-slate-400">Phone</p>
-                                            <p className="font-medium text-slate-900 dark:text-slate-100">{personalInfo.phone}</p>
-                                        </div>
-                                    </a>
-
-                                    <div className="flex items-center gap-4 p-4 glass dark:glass-dark rounded-lg hover:bg-slate-50 dark:hover:bg-white/5 transition-all group">
-                                        <div className="p-3 bg-gradient-to-r from-primary-500 to-accent-500 rounded-lg group-hover:scale-110 transition-transform">
-                                            <MapPin className="w-5 h-5 text-white" />
-                                        </div>
-                                        <div>
-                                            <p className="text-sm text-slate-600 dark:text-slate-400">Location</p>
-                                            <p className="font-medium text-slate-900 dark:text-slate-100">{personalInfo.location}</p>
-                                        </div>
-                                    </div>
+                                        if (item.href) {
+                                            return (
+                                                <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer">
+                                                    {content}
+                                                </a>
+                                            );
+                                        }
+                                        return <div key={item.label}>{content}</div>;
+                                    })}
                                 </div>
                             </div>
 
                             {/* Social Links */}
                             <div>
                                 <h3 className="text-xl font-heading font-bold mb-4">Connect With Me</h3>
-                                <div className="flex gap-4">
-                                    {socialLinks.map((link) => (
-                                        <motion.a
-                                            key={link.name}
-                                            href={link.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            whileHover={{ scale: 1.1, y: -2 }}
-                                            whileTap={{ scale: 0.95 }}
-                                            className="p-4 glass dark:glass-dark rounded-lg hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-300"
-                                            aria-label={link.name}
-                                        >
-                                            <SocialIcon name={link.icon} />
-                                        </motion.a>
-                                    ))}
-                                </div>
+                                <SocialLinks size="md" />
                             </div>
 
                             {/* Resume Download */}
                             <a
                                 href="/resume.pdf"
                                 download
-                                className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300"
+                                className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
                             >
                                 <Download className="w-5 h-5" />
                                 Download Resume
@@ -156,7 +147,7 @@ export default function Contact() {
                 <FadeIn delay={0.6}>
                     <div className="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 text-center">
                         <p className="text-slate-600 dark:text-slate-400">
-                            &copy; {new Date().getFullYear()} {personalInfo.name}. Built with ❤️
+                            &copy; {new Date().getFullYear()} {personalInfo.name}. Built with &#10084;&#65039;
                         </p>
                     </div>
                 </FadeIn>

@@ -1,19 +1,18 @@
 import FadeIn from "../animations/FadeIn";
-import { experiences } from "@/lib/constants";
+import { experiences, SECTION_IDS } from "@/lib/constants";
 import { Briefcase, MapPin, Calendar } from "lucide-react";
+import SectionHeader from "@/components/ui/SectionHeader";
+import TechBadge from "@/components/ui/TechBadge";
 
 export default function Experience() {
     return (
-        <section id="experience" className="section-padding bg-slate-50 dark:bg-slate-950">
+        <section id={SECTION_IDS.experience} className="section-padding bg-slate-50 dark:bg-slate-950">
             <div className="container-custom">
-                <FadeIn>
-                    <h2 className="text-4xl md:text-5xl font-heading font-bold text-center mb-4">
-                        Work <span className="text-gradient">Experience</span>
-                    </h2>
-                    <p className="text-center text-slate-600 dark:text-slate-400 mb-16 max-w-2xl mx-auto">
-                        Building production-ready systems and AI-driven applications
-                    </p>
-                </FadeIn>
+                <SectionHeader
+                    title="Work"
+                    highlight="Experience"
+                    subtitle="Building LLM-powered systems and AI-driven production applications"
+                />
 
                 <div className="max-w-4xl mx-auto">
                     <div className="relative">
@@ -31,25 +30,21 @@ export default function Experience() {
                                     <div className="ml-16 md:ml-0">
                                         <div className="glass dark:glass-dark rounded-xl p-6 hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-300 group">
                                             {/* Header */}
-                                            <div className="mb-4">
-                                                <div className="flex items-start justify-between mb-2">
-                                                    <h3 className="text-xl font-heading font-bold text-slate-900 dark:text-slate-100 group-hover:text-gradient transition-all">
-                                                        {exp.role}
-                                                    </h3>
+                                            <h3 className="text-xl font-heading font-bold text-slate-900 dark:text-slate-100 group-hover:text-gradient transition-all mb-2">
+                                                {exp.role}
+                                            </h3>
+                                            <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600 dark:text-slate-400 mb-4">
+                                                <div className="flex items-center gap-1">
+                                                    <Briefcase className="w-4 h-4" />
+                                                    <span className="font-semibold">{exp.company}</span>
                                                 </div>
-                                                <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600 dark:text-slate-400">
-                                                    <div className="flex items-center gap-1">
-                                                        <Briefcase className="w-4 h-4" />
-                                                        <span className="font-semibold">{exp.company}</span>
-                                                    </div>
-                                                    <div className="flex items-center gap-1">
-                                                        <Calendar className="w-4 h-4" />
-                                                        <span>{exp.duration}</span>
-                                                    </div>
-                                                    <div className="flex items-center gap-1">
-                                                        <MapPin className="w-4 h-4" />
-                                                        <span>{exp.location}</span>
-                                                    </div>
+                                                <div className="flex items-center gap-1">
+                                                    <Calendar className="w-4 h-4" />
+                                                    <span>{exp.duration}</span>
+                                                </div>
+                                                <div className="flex items-center gap-1">
+                                                    <MapPin className="w-4 h-4" />
+                                                    <span>{exp.location}</span>
                                                 </div>
                                             </div>
 
@@ -57,7 +52,7 @@ export default function Experience() {
                                             <ul className="space-y-2 mb-4">
                                                 {exp.description.map((item, i) => (
                                                     <li key={i} className="flex items-start gap-2 text-slate-700 dark:text-slate-300">
-                                                        <span className="text-primary-500 mt-1.5">•</span>
+                                                        <span className="text-primary-500 mt-1.5">&#8226;</span>
                                                         <span>{item}</span>
                                                     </li>
                                                 ))}
@@ -66,12 +61,7 @@ export default function Experience() {
                                             {/* Technologies */}
                                             <div className="flex flex-wrap gap-2">
                                                 {exp.technologies.map((tech, i) => (
-                                                    <span
-                                                        key={i}
-                                                        className="px-3 py-1 text-xs font-medium bg-gradient-to-r from-primary-500/10 to-accent-500/10 text-primary-700 dark:text-primary-300 rounded-full border border-primary-500/20"
-                                                    >
-                                                        {tech}
-                                                    </span>
+                                                    <TechBadge key={i} name={tech} />
                                                 ))}
                                             </div>
                                         </div>

@@ -2,16 +2,10 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { personalInfo, socialLinks } from "@/lib/constants";
+import { personalInfo, roles, SECTION_IDS } from "@/lib/constants";
+import { scrollToSection } from "@/lib/utils";
 import { useEffect, useState } from "react";
-import SocialIcon from "@/components/ui/SocialIcon";
-
-const roles = [
-    "AI/ML Engineer",
-    "Backend Developer",
-    "Python Developer",
-    "Machine Learning Engineer",
-];
+import SocialLinks from "@/components/ui/SocialLinks";
 
 export default function Hero() {
     const [currentRole, setCurrentRole] = useState(0);
@@ -23,16 +17,9 @@ export default function Hero() {
         return () => clearInterval(interval);
     }, []);
 
-    const scrollToNext = () => {
-        const aboutSection = document.getElementById("about");
-        if (aboutSection) {
-            aboutSection.scrollIntoView({ behavior: "smooth" });
-        }
-    };
-
     return (
         <section
-            id="home"
+            id={SECTION_IDS.home}
             className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-slate-950 dark:via-blue-950 dark:to-purple-950"
         >
             {/* Animated background gradient */}
@@ -64,7 +51,7 @@ export default function Hero() {
                         <span className="text-gradient">{personalInfo.name}</span>
                     </motion.h1>
 
-                    {/* Rotating roles with AnimatePresence */}
+                    {/* Rotating roles */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -92,8 +79,8 @@ export default function Hero() {
                         transition={{ duration: 0.6, delay: 0.6 }}
                         className="text-lg md:text-xl text-slate-700 dark:text-slate-300 max-w-3xl mx-auto mb-12 leading-relaxed"
                     >
-                        Building scalable backend services and AI-driven applications with Python, FastAPI, and Machine Learning.
-                        Passionate about creating production-ready systems that solve real-world problems.
+                        Building LLM-powered systems, multi-agent RAG pipelines, and real-time voice AI applications.
+                        Specialized in end-to-end AI system design with sub-200ms latency backends.
                     </motion.p>
 
                     {/* CTA Buttons */}
@@ -104,19 +91,19 @@ export default function Hero() {
                         className="flex flex-wrap items-center justify-center gap-4 mb-12"
                     >
                         <a
-                            href="#contact"
+                            href={`#${SECTION_IDS.contact}`}
                             onClick={(e) => {
                                 e.preventDefault();
-                                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                                scrollToSection(SECTION_IDS.contact);
                             }}
-                            className="px-8 py-3 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300"
+                            className="px-8 py-3 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
                         >
                             Get In Touch
                         </a>
                         <a
                             href="/resume.pdf"
                             download
-                            className="px-8 py-3 glass dark:glass-dark rounded-lg font-medium hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-300"
+                            className="px-8 py-3 glass dark:glass-dark rounded-lg font-medium hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-300 cursor-pointer"
                         >
                             Download Resume
                         </a>
@@ -127,29 +114,16 @@ export default function Hero() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 1 }}
-                        className="flex items-center justify-center gap-4"
+                        className="flex justify-center"
                     >
-                        {socialLinks.map((link) => (
-                            <motion.a
-                                key={link.name}
-                                href={link.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                whileHover={{ scale: 1.1, y: -2 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="p-3 glass dark:glass-dark rounded-lg hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-300"
-                                aria-label={link.name}
-                            >
-                                <SocialIcon name={link.icon} />
-                            </motion.a>
-                        ))}
+                        <SocialLinks size="sm" />
                     </motion.div>
                 </div>
             </div>
 
             {/* Scroll indicator */}
             <motion.button
-                onClick={scrollToNext}
+                onClick={() => scrollToSection(SECTION_IDS.about)}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 1.2 }}
