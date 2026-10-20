@@ -36,14 +36,6 @@ export const PROJECTS = [
       { label: 'Live dashboard lag', value: '~1 s', note: 'report flush · SSE feed' },
       { label: 'Conversation data saved', value: 'None', note: 'timings only, no text or audio' },
     ],
-    highlights: [
-      'Unsafe by default: a tool is retried only if it is declared READ_ONLY, or IDEMPOTENT_WRITE and called with an idempotency key. Everything else fails over to "request human review".',
-      '"Uncertain" is its own outcome: a write that timed out might have committed, so TurnLab never reports it as failed or retries it. It reports uncertain and the agent is told not to claim success.',
-      'Retries are bounded twice: per tool (max_retries ≤ 3) and per call (a shared budget of 3), so a flaky dependency cannot loop a caller forever.',
-      'Reply wait comes from LiveKit\'s own per-turn metrics (end of speech → first agent audio), split into model time-to-first-token and speech time-to-first-byte, so a slow reply points at the stage that caused it.',
-      'Privacy by design: the recorder accepts only allowlisted fields (states, timings, error types). Exception messages, tool arguments, transcripts and audio are never stored.',
-      'Optional extras stay opt-in: OpenTelemetry export of LiveKit spans with retry decisions attached, Supabase metadata sync, and a Groq "suggest causes" button whose evidence references are validated.',
-    ],
     diagram: {
       size: [1000, 600],
       groups: [
@@ -270,15 +262,6 @@ def on_item(event):
       { label: '588-page PDF searchable in', value: '22 s', note: 'down from ~30 min' },
       { label: 'Automated tests', value: '85', note: 'unit + real Postgres · mypy --strict' },
     ],
-    highlights: [
-      'The LLM never does arithmetic: for numeric questions it only picks the table cells (a typed CalcPlan) and Python computes sums, ratios and growth exactly.',
-      'Confidence is computed, not self-reported: 0.45 × retrieval relevance + 0.20 × citation coverage + 0.35 × fact-check verdict.',
-      'Choices were measured on an adversarial eval set: equal-weight hybrid search hurt (look-alike documents share keywords), so keyword results are weighted 0.25, and CPU rerankers were too slow to keep on.',
-      'Two-stage indexing: a 588-page, 113 MB textbook is keyword-searchable in 22 s; embeddings are paced to provider rate limits and the job resumes after a crash or quota reset.',
-      'Background jobs run on Postgres itself: queued in the same transaction as the upload, claimed with FOR UPDATE SKIP LOCKED under a lease, retried with exponential backoff. No extra queue service.',
-      'Degrades gracefully: no embeddings → keyword-only search; a crashing parser runs in an isolated process and falls back to the fast reader.',
-      'Security: every query is scoped to the owner (and tested), uploads are validated by content, and the JWT stays in an httpOnly cookie behind a Next.js backend-for-frontend proxy.',
-    ],
     diagram: {
       size: [1000, 600],
       groups: [
@@ -467,14 +450,6 @@ graph.add_conditional_edges("verify", after_verify, {"generate": "generate", END
       { label: 'Token accuracy', value: '99.1%', note: 'CoNLL-2003 validation · 3,250 sentences' },
       { label: 'Training sentences', value: '14k+', note: '3 epochs · 2,634 steps' },
       { label: 'Automated tests', value: '13', note: '9 unit · 4 real-model integration' },
-    ],
-    highlights: [
-      'Sub-word label alignment: only the first word-piece of each word carries the label; special tokens and continuations get −100 so the loss ignores them.',
-      'No silent truncation: inputs are tokenised without truncation and anything over the model limit (512 tokens) or 10,000 characters is rejected with a clear 400.',
-      'Clear JSON errors: 400 bad input, 401 failed login, 413 oversized body, 415 wrong content type, 503 model missing, 500 inference failure.',
-      'Secure by default: both prediction routes require login, and the app refuses to start without NER_USERNAME and a Werkzeug password hash in the environment.',
-      'Production serving: Waitress instead of Flask\'s debug server, lazy model load from local files only, and a lock for thread-safe inference.',
-      'Streamlit demo uses predict_detailed() for character offsets and confidence, so entities are highlighted inline and counted by type.',
     ],
     diagram: {
       size: [1000, 660],
@@ -675,16 +650,7 @@ def predict_api():
       { label: 'Agents', value: '6', note: 'separate workspaces, not merged' },
       { label: 'Delegates of main', value: '3', note: 'job · Science Evidence · AI Daily' },
       { label: 'Daily briefing', value: '12:00', note: 'IST · 6 official AI feeds' },
-      { label: 'Model cost', value: '₹0', note: 'Gemini Flash-Lite free tier' },
-    ],
-    highlights: [
-      'Hub-and-spoke orchestration: main is the systemAgent and heartbeat owner, with subagents.allowAgents = [ai-daily, job-aagent, science-evidence] and delegationMode "prefer", so it hands work to a specialist instead of doing it itself.',
-      "Delegation is written into main's AGENTS.md for jobs: requests go to job-aagent via sessions_spawn, and main relays its verified links and fit explanations, never applying or contacting employers.",
-      'Science Evidence answers from the literature, not memory: it queries PubMed, Europe PMC and Semantic Scholar directly, prefers guidelines and meta-analyses, reads at least five sources, never cites a paper it has not opened, and ends with a 🟢🟡🟠🔴 confidence rating.',
-      'Specialists stay leaf nodes: Science Evidence and AI Daily have empty allowAgents lists, so delegated work cannot fan out further, and delegated tasks never read main\'s private memory.',
-      'Sized for an 8 GB laptop: agents.maxConcurrent = 2 and subagents.maxConcurrent = 1, so a delegated run cannot starve the gateway.',
-      'Channel bindings route each Telegram bot account to its own agent. DMs use pairing, groups require a mention, and the gateway listens on loopback only with token auth.',
-      'Prompt-injection defence for news: AI Daily has tools.deny ["*"], so it can only return JSON. The deterministic runner fetches, validates the IDs, and falls back to source ranking (disclosed in the email) if the model misbehaves.',
+      { label: 'Concurrent runs', value: '2', note: 'max · 1 sub-agent at a time' },
     ],
     diagram: {
       size: [1000, 720],

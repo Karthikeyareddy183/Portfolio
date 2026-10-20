@@ -107,7 +107,7 @@ export const PORTFOLIO = {
       points: [
         'Hub-and-spoke design: a main agent on Telegram delegates job searches and research questions to specialist sub-agents with their own workspaces and memory.',
         'A daily AI-news briefing where a script does all the I/O and a tool-less agent only ranks, with validation and a disclosed fallback if the model misbehaves.',
-        'Sized for an 8 GB laptop with concurrency caps, loopback-only gateway and per-bot channel bindings, running on a free model tier.',
+        'Sized for an 8 GB laptop with concurrency caps, a loopback-only gateway and per-bot channel bindings.',
       ],
       metric: { value: '6', label: 'agents, one orchestrator' },
       tags: ['OpenClaw', 'Multi-agent', 'Gemini Flash-Lite', 'Telegram', 'PowerShell'],

@@ -1,6 +1,6 @@
 /**
  * OverviewView.jsx — project summary: signature motion graphic, key metrics,
- * engineering highlights, stack, and shortcuts into the deeper tabs.
+ * what it is, stack, and shortcuts into the deeper tabs.
  */
 import { motion } from 'motion/react';
 import { ArrowRight, Network, Waypoints } from 'lucide-react';
@@ -39,13 +39,6 @@ export function OverviewView({ project, onTab }) {
               <Network size={16} /> Explore architecture
             </button>
           </div>
-        </motion.section>
-
-        <motion.section className="card" {...rise(5)}>
-          <span className="eyebrow">Engineering highlights</span>
-          <ul className="highlights">
-            {project.highlights.map((h) => <li key={h}>{h}</li>)}
-          </ul>
         </motion.section>
       </div>
     </div>

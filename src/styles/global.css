@@ -315,17 +315,11 @@ button.chip:hover { border-color: var(--accent); }
 .metric-value { font: 700 30px/1.1 var(--font-mono); color: var(--accent); letter-spacing: -0.03em; }
 .metric-label { font-weight: 600; font-size: 14px; }
 .metric-note { font-size: 12px; }
-.overview-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 18px; }
+.overview-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
 .overview-grid > .card { padding: 24px; }
-.lead { font-size: 16px; line-height: 1.7; max-width: 70ch; }
+.lead { font-size: 16px; line-height: 1.7; }
 .stack { margin-top: 20px; }
 .cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
-.highlights { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 14px; }
-.highlights li { position: relative; padding-left: 22px; font-size: 15px; line-height: 1.6; }
-.highlights li::before {
-  content: ''; position: absolute; left: 2px; top: 0.6em;
-  width: 8px; height: 8px; border-radius: 2px; rotate: 45deg; background: var(--accent);
-}
 
 /* 7. Diagram, architecture & flow ---------------------------------------- */
 .diagram-card { position: relative; padding: 10px; overflow: hidden; }
