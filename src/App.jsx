@@ -8,6 +8,7 @@
  */
 import { useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
+import { Analytics } from '@vercel/analytics/react';
 import { useHashRoute } from './hooks/useHashRoute.js';
 import { useMediaQuery } from './hooks/useMediaQuery.js';
 import { PROJECTS, TABS, getProject } from './data/projects.js';
@@ -69,7 +70,21 @@ export default function App() {
   // The hash is the router, so the skip link moves focus instead of using #main.
   const skipToMain = (e) => { e.preventDefault(); document.getElementById('main')?.focus(); };
 
-  const palette = <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} navigate={navigate} />;
+  // Vercel Web Analytics. Hash navigation isn't a real page load, so pass the
+  // route explicitly: this disables auto-tracking and records a page view
+  // whenever the hash route changes (e.g. route "/[system]/[view]", path "/doc-agent/flow").
+  const analytics = (
+    <Analytics
+      route={isPortfolio ? '/' : project ? (tab === 'overview' ? '/[system]' : '/[system]/[view]') : '/systems'}
+      path={isPortfolio ? '/' : project ? `/${project.id}${tab === 'overview' ? '' : `/${tab}`}` : '/systems'} />
+  );
+
+  const palette = (
+    <>
+      <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} navigate={navigate} />
+      {analytics}
+    </>
+  );
 
   if (isPortfolio) {
     return (
