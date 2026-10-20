@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Systems Dashboard
 
-## Getting Started
+Portfolio of M Karthikeya Reddy (AI Engineer) plus interactive walkthroughs of four systems, each with an animated architecture graph and a step-by-step data-flow player.
 
-First, run the development server:
+| Route | Page |
+|-------|------|
+| `#/` | Portfolio: about, experience, projects, skills, education, contact (content in `src/data/portfolio.js`) |
+| `#/systems` | Overview of all systems |
+| `#/<system>[/<view>]` | A system's workspace (below) |
+
+| # | System | Source | Deep link |
+|---|--------|--------|-----------|
+| 01 | TurnLab: monitoring and safe-retry layer for LiveKit voice agents | [turnlab](https://github.com/Karthikeyareddy183/turnlab) | `#/voice-agent` |
+| 02 | DocMind: agentic RAG with verifiable, cited answers (LangGraph + pgvector) | [docmind-agentic-rag](https://github.com/Karthikeyareddy183/docmind-agentic-rag) | `#/doc-agent` |
+| 03 | BERT Named Entity Recognition API (Flask + Streamlit) | [BERT-based-Named-Entity-Recognition-API](https://github.com/Karthikeyareddy183/BERT-based-Named-Entity-Recognition-API) | `#/bert-ner` |
+| 04 | OpenClaw personal agent fleet (six agents, runs locally) | local config, not public | `#/openclaw-agents` |
+
+The ids `voice-agent` and `doc-agent` predate the TurnLab and DocMind renames; they are kept so existing links keep working.
+
+Every system has the same four views, in the same order: `overview`, `architecture`, `flow` and `code`. For example, `#/doc-agent/flow` opens the Doc Agent's data flow directly.
+
+## Run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev       # http://localhost:5173
+npm run build     # static output in dist/
+npm run preview   # serve the production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Navigation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Sidebar** (desktop): Systems → views tree with a live position indicator
+- **Breadcrumb top bar**: shows where you are; ‹ › moves to the previous or next system and keeps the current view
+- **Bottom dock** (mobile/tablet): Home plus the four systems, within thumb reach
+- **Command palette**: `Ctrl/⌘ + K` or `/`. Searches systems, views and tech (e.g. "pgvector", "deepgram")
+- **Shortcuts**: `1`–`4` jump to a system, `0` goes to the portfolio; in a data flow, `←`/`→` step and `Space` plays or pauses
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Structure
 
-## Learn More
+```
+src/
+  data/projects.js        ← all content: nodes, edges, flows, metrics, code (taken from the repos and the local OpenClaw config)
+  data/portfolio.js       ← portfolio page content (from the resume; no phone number)
+  data/profile.js         ← name, links
+  components/
+    SystemDiagram.jsx     ← animated SVG graph engine (desktop + mobile layouts)
+    FlowPlayer.jsx        ← step-through data-flow player
+    ArchitectureView.jsx  ← graph + component inspector
+    OverviewView.jsx, CodeView.jsx, Signature.jsx (per-project motion graphic)
+    Navigation.jsx        ← Sidebar, TopBar, MobileDock
+    Portfolio.jsx         ← portfolio home page (#/)
+    CommandPalette.jsx
+  hooks/                  ← hash router, media query
+  styles/global.css       ← tokens + all styles
+```
 
-To learn more about Next.js, take a look at the following resources:
+To add a project, append an object to `PROJECTS` in `src/data/projects.js`. The navigation, palette, shortcuts and diagrams pick it up automatically.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The build is fully static. `base: './'` plus hash routing means it works from any path:
 
-## Deploy on Vercel
+- **Vercel / Netlify**: import the repo; build command `npm run build`, output dir `dist`
+- **GitHub Pages**: push `dist/` to a `gh-pages` branch, or use the official Pages action
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+React 19 · Vite · [Motion](https://motion.dev) (UI and packet animation) · Lucide icons · Fira Code / Fira Sans. It respects `prefers-reduced-motion`.

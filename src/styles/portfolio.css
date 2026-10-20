@@ -1,0 +1,140 @@
+/* ==========================================================================
+   portfolio.css — the portfolio home page (#/). Reuses the tokens, buttons,
+   chips, cards and signatures from global.css.
+     1. Layout (two columns ≥ 1024px, one column below)
+     2. Intro column: headline, section nav, actions
+     3. Sections: about, experience, projects, skills, contact
+     4. Responsive & motion
+   ========================================================================== */
+
+/* 1. Layout ---------------------------------------------------------------- */
+.pf {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 72px;
+}
+.pf-intro {
+  position: sticky; top: 0;
+  height: 100vh; height: 100dvh;
+  padding: 88px 0 56px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.pf-main { padding: 88px 0 64px; min-width: 0; }
+
+/* 2. Intro column ------------------------------------------------------------ */
+.pf-intro .hero-title { font-size: clamp(2.6rem, 4.6vw, 4.4rem); margin: 18px 0 14px; }
+.pf-focus { font-size: 20px; font-weight: 600; color: var(--text); }
+.pf-tagline { max-width: 44ch; margin-top: 14px; font-size: 17px; color: var(--muted); }
+
+.pf-nav { display: flex; flex-direction: column; gap: 4px; margin-top: 52px; }
+.pf-nav-item {
+  display: inline-flex; align-items: center; gap: 14px;
+  min-height: 36px; width: fit-content;
+  font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+.pf-nav-line { display: inline-block; width: 32px; height: 1px; background: var(--muted); transition: width 0.25s var(--ease), background 0.25s; }
+.pf-nav-item:hover, .pf-nav-item.is-on { color: var(--text); }
+.pf-nav-item:hover .pf-nav-line, .pf-nav-item.is-on .pf-nav-line { width: 64px; background: var(--text); }
+
+.pf-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.pf-socials { display: flex; align-items: center; gap: 18px; margin-top: 22px; color: var(--muted); }
+.pf-socials a { display: inline-grid; place-items: center; min-width: 32px; min-height: 32px; transition: color 0.2s; }
+.pf-socials a:hover { color: var(--text); }
+.pf-kbd { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; font-size: 12px; }
+
+/* 3. Sections ----------------------------------------------------------------- */
+.pf-section { scroll-margin-top: 48px; margin-bottom: 104px; }
+.pf-section-title {
+  margin-bottom: 26px;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--text);
+}
+
+.pf-prose { display: grid; gap: 16px; color: var(--muted); font-size: 16.5px; line-height: 1.75; }
+.pf-prose p:first-child { color: var(--text); }
+.pf-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 30px; }
+.pf-stat { display: grid; gap: 4px; padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); font-size: 12.5px; line-height: 1.35; }
+.pf-stat .metric-value { font-size: 22px; }
+
+/* Experience timeline */
+.pf-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.pf-item {
+  position: relative;
+  display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 20px;
+  padding: 20px; margin: 0 -20px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  transition: background 0.25s, border-color 0.25s;
+}
+.pf-period { font-size: 12px; padding-top: 4px; }
+.pf-item-title { font-size: 17px; font-weight: 600; }
+.pf-at { color: var(--primary); font-weight: 500; }
+.pf-points { margin: 10px 0 14px; padding-left: 18px; display: grid; gap: 6px; color: var(--muted); font-size: 14.5px; line-height: 1.6; }
+.pf-points li::marker { color: var(--accent); }
+.pf-tag { min-height: 26px; padding: 0 10px; font: 500 11.5px var(--font-mono); color: var(--muted); }
+
+/* Cursor spotlight, shared by experience rows and project cards */
+.pf-item::before, .pf-project::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  opacity: 0; transition: opacity 0.3s;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--accent) 11%, transparent), transparent 70%);
+}
+
+/* Projects */
+.pf-projects { display: grid; gap: 22px; }
+.pf-project { position: relative; display: grid; gap: 14px; padding: 18px; transition: border-color 0.25s, transform 0.25s var(--ease); }
+.pf-sig { height: 118px; }
+.pf-project-head { display: flex; align-items: center; gap: 12px; }
+.pf-project-head .system-icon { color: var(--accent); }
+.pf-project h3 { font-size: 19px; }
+.pf-one-liner { color: var(--text); font-size: 15px; }
+.pf-project .pf-points { margin: 0; }
+.pf-project-foot { display: grid; gap: 14px; }
+.pf-project-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.pf-private { font-size: 12px; }
+
+/* Skills, education, contact */
+.pf-skills { display: grid; gap: 22px; }
+.pf-skill-title { margin-bottom: 10px; font-size: 14px; font-weight: 600; color: var(--text); }
+.pf-edu { margin-top: 30px; padding: 20px; display: grid; gap: 6px; }
+.pf-edu .eyebrow { margin-bottom: 4px; }
+.pf-edu h3 { font-size: 17px; }
+.pf-edu p { font-size: 14px; }
+.pf-contact { padding: 26px; display: grid; gap: 14px; }
+.pf-contact-title { font-size: clamp(1.3rem, 2.4vw, 1.7rem); max-width: 26ch; }
+.pf-footer { font-size: 12px; padding-top: 8px; border-top: 1px solid var(--line); padding-top: 22px; }
+
+/* 4. Responsive & motion --------------------------------------------------------- */
+@media (hover: hover) {
+  .pf-item:hover { background: var(--surface); border-color: var(--line); }
+  .pf-item:hover::before, .pf-project:hover::before { opacity: 1; }
+  .pf-project:hover { border-color: color-mix(in srgb, var(--accent) 45%, transparent); transform: translateY(-2px); }
+}
+
+@media (max-width: 1023px) {
+  .pf { grid-template-columns: 1fr; gap: 0; padding: 0 24px; }
+  .pf-intro { position: static; height: auto; padding: 56px 0 8px; gap: 28px; }
+  .pf-nav { display: none; }            /* one column: the page simply scrolls */
+  .pf-main { padding-top: 48px; }
+  .pf-section { margin-bottom: 72px; }
+  .pf-section-title { position: sticky; top: 0; z-index: 2; margin: 0 -24px 20px; padding: 14px 24px; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); }
+}
+
+@media (max-width: 720px) {
+  .pf { padding: 0 16px; }
+  .pf-section-title { margin: 0 -16px 18px; padding: 12px 16px; }
+  .pf-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pf-item { grid-template-columns: 1fr; gap: 6px; padding: 16px 0; margin: 0; }
+  .pf-kbd { display: none; }
+  .pf-contact .btn.is-primary { word-break: break-all; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-project, .pf-nav-line { transition: none; }
+  .pf-project:hover { transform: none; }
+}
