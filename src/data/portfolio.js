@@ -8,22 +8,22 @@
 
 export const PORTFOLIO = {
   email: 'karthikeyareddy183@gmail.com',
-  headline: 'AI Engineer',
-  focus: 'Voice AI & Agentic Systems',
+  headline: 'Python Backend Engineer',
+  focus: 'FastAPI · REST APIs · AI-Assisted Development',
   tagline:
-    'I build real-time voice agents, agentic RAG systems and the reliability tooling that keeps them honest in production.',
+    'I build, debug and maintain production Python backends for AI-powered products, and I write the tests that prove they work.',
 
   about: [
-    'I\'m an AI engineer in Bengaluru with 1+ year of production experience building conversational AI agents, real-time voice systems and the Python backends behind them.',
-    'At Cravv I\'m building voice AI for busy kitchens: a custom wake-word model that holds up against exhaust fans, sizzling and clattering utensils, wired into a wake word → VAD → STT → LLM → TTS pipeline that answers in about two seconds. Before that, at Craftech 360, I shipped LiveKit voice agents for Cheeko AI with session memory, function calling and multi-agent handoffs, serving 100+ active users.',
-    'Outside work I build systems that make AI easier to trust: agents that cite the exact page they read, refuse to retry an unsafe booking, and show where every millisecond of latency went. Each one has an interactive walkthrough in my systems dashboard.',
+    'I\'m a Python backend engineer in Bengaluru with 1.5 years of experience developing, debugging and maintaining production backend services for AI-powered products.',
+    'At Cravv I built the Python backend for a real-time voice assistant as async services, then tracked down its performance bottlenecks with component-level profiling and structured logging, keeping end-to-end latency at about two seconds. Before that, at Craftech 360, I built REST APIs and Docker + GitHub Actions CI/CD pipelines that cut deployment time by 50% for services used by 100+ active users.',
+    'I use AI tools like Claude Code and Codex every day, and I treat what they write like any other pull request: I review it, test it and verify it before it ships. My side projects follow the same habit, from a retry layer that refuses to repeat unsafe writes to a RAG system that cites the exact page behind every answer.',
   ],
 
   stats: [
-    { value: '1+ yr', label: 'production AI experience' },
+    { value: '1.5 yrs', label: 'production Python backend' },
     { value: '100+', label: 'active users served' },
-    { value: '~2 s', label: 'voice response latency' },
-    { value: '4', label: 'systems with live walkthroughs' },
+    { value: '50%', label: 'faster deployments (CI/CD)' },
+    { value: '~2 s', label: 'end-to-end voice latency' },
   ],
 
   experience: [
@@ -32,11 +32,11 @@ export const PORTFOLIO = {
       role: 'AI Engineer',
       period: 'May 2026 – Present',
       points: [
-        'Trained a custom wake-word detection model with OpenWakeWord, reaching 90% recall at ≤ 0.5 false positives per hour in high-noise kitchens (exhaust fans, sizzling, utensils).',
-        'Engineered an end-to-end voice pipeline (wake word, VAD, STT, LLM and TTS) with about 2-second average response latency.',
-        'Evaluated Whisper, ElevenLabs and Sarvam AI speech models on transcription accuracy, latency, multilingual support and cost.',
+        'Built the Python backend for a real-time voice assistant (wake word, VAD, STT, LLM, TTS) as async services, reaching ~2 s average end-to-end response latency.',
+        'Trained and integrated a custom wake-word model (OpenWakeWord) with 90% recall at ≤ 0.5 false positives per hour in noisy kitchen environments.',
+        'Investigated and resolved performance bottlenecks in asynchronous Python services using component-level profiling and structured logging, improving response consistency at about 2 s average end-to-end latency.',
       ],
-      tags: ['OpenWakeWord', 'VAD', 'STT / TTS', 'Whisper', 'ElevenLabs', 'Sarvam AI'],
+      tags: ['Python', 'asyncio', 'Profiling', 'Structured logging', 'OpenWakeWord', 'STT / TTS'],
     },
     {
       company: 'Craftech 360',
@@ -115,12 +115,14 @@ export const PORTFOLIO = {
   ],
 
   skills: [
-    { group: 'AI agents & orchestration', items: ['LiveKit Agents', 'Agentic AI', 'Multi-agent systems', 'LangGraph', 'LangChain', 'CrewAI', 'Function / tool calling', 'Session memory', 'Multi-agent handoffs'] },
-    { group: 'Voice AI', items: ['STT', 'TTS', 'VAD', 'OpenWakeWord', 'Whisper', 'ElevenLabs', 'Sarvam AI', 'Real-time audio streaming'] },
-    { group: 'LLMs & machine learning', items: ['PyTorch', 'TensorFlow', 'Transformers', 'BERT', 'RAG', 'Embeddings', 'Vector search', 'Fine-tuning', 'Prompt engineering'] },
-    { group: 'Programming & backend', items: ['Python', 'JavaScript', 'SQL', 'FastAPI', 'Flask', 'REST APIs'] },
-    { group: 'MLOps & infrastructure', items: ['Docker', 'CI/CD', 'GitHub Actions', 'Kubernetes', 'AWS', 'Azure'] },
-    { group: 'Databases & tools', items: ['Supabase', 'Pinecone', 'ChromaDB', 'Hugging Face', 'n8n', 'Ollama', 'Groq'] },
+    // Same groups and order as "Areas of Expertise" on the resume.
+    { group: 'Python & backend', items: ['Python (asyncio, type hints, OOP)', 'FastAPI', 'Flask', 'REST API design', 'Webhooks', 'API authentication', 'Error handling & retries'] },
+    { group: 'Databases', items: ['PostgreSQL', 'SQL', 'Supabase', 'Vector databases (Pinecone, ChromaDB)'] },
+    { group: 'Testing & debugging', items: ['pytest', 'Unit & integration testing', 'Regression testing', 'Debugging & root-cause analysis', 'Logging', 'Code review'] },
+    { group: 'AI-assisted development', items: ['Claude Code', 'Codex'] },
+    { group: 'Other languages', items: ['JavaScript', 'Node.js'] },
+    { group: 'DevOps & monitoring', items: ['Git', 'Docker', 'GitHub Actions', 'CI/CD', 'Kubernetes', 'AWS', 'Azure', 'OpenTelemetry', 'Grafana', 'Langfuse'] },
+    { group: 'AI / LLM', items: ['LLM APIs', 'Function / tool calling', 'RAG', 'LangChain', 'LangGraph', 'LiveKit Agents', 'STT', 'TTS', 'PyTorch', 'Transformers'] },
   ],
 
   education: {
