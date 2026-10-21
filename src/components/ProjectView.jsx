@@ -3,7 +3,7 @@
  * tab's content, plus a hand-off card to the next system.
  */
 import { AnimatePresence, motion } from 'motion/react';
-import { ArrowRight, Calendar, ExternalLink, Lock } from 'lucide-react';
+import { ArrowRight, ExternalLink, Lock } from 'lucide-react';
 import { PROJECTS, TABS } from '../data/projects.js';
 import { Icon, GithubMark } from './Icon.jsx';
 import { Signature } from './Signature.jsx';
@@ -24,7 +24,6 @@ export function ProjectView({ project, tab, navigate, compact }) {
           <div className="project-kicker mono">
             <span className="accent-dot" />
             SYSTEM {project.index} / {String(PROJECTS.length).padStart(2, '0')}
-            <span className="muted"><Calendar size={12} /> {project.period}</span>
           </div>
           <motion.h1 key={project.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: 'easeOut' }}>
