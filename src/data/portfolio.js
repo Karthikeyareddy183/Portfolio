@@ -8,22 +8,24 @@
 
 export const PORTFOLIO = {
   email: 'karthikeyareddy183@gmail.com',
-  headline: 'Python Backend Engineer',
-  focus: 'FastAPI · REST APIs · AI-Assisted Development',
+  headline: 'AI Engineer',
+  focus: 'Voice AI · Agentic Systems · Python Backend',
   tagline:
-    'I build, debug and maintain production Python backends for AI-powered products, and I write the tests that prove they work.',
+    'I build real-time voice agents, agentic LLM applications and the production Python backends that run them, then test and debug them until they hold up.',
 
+  // One connected story (no per-role tags) that still covers AI engineering,
+  // voice AI and Python backend work.
   about: [
-    'I\'m a Python backend engineer in Bengaluru with 1.5 years of experience developing, debugging and maintaining production backend services for AI-powered products.',
-    'At Cravv I built the Python backend for a real-time voice assistant as async services, then tracked down its performance bottlenecks with component-level profiling and structured logging, keeping end-to-end latency at about two seconds. Before that, at Craftech 360, I built REST APIs and Docker + GitHub Actions CI/CD pipelines that cut deployment time by 50% for services used by 100+ active users.',
-    'I use AI tools like Claude Code and Codex every day, and I treat what they write like any other pull request: I review it, test it and verify it before it ships. My side projects follow the same habit, from a retry layer that refuses to repeat unsafe writes to a RAG system that cites the exact page behind every answer.',
+    'I\'m an AI engineer in Bengaluru who builds real-time voice agents and the Python backends behind them, with 1.5 years of production experience.',
+    'At Cravv I built a voice assistant for noisy kitchens end to end: a custom OpenWakeWord model with 90% recall at ≤ 0.5 false positives per hour, feeding async Python services for VAD, speech-to-text, the LLM and text-to-speech. Profiling and structured logging helped me hold it at about two seconds end to end. Before that, at Craftech 360, I shipped LiveKit voice agents for Cheeko AI with session memory, function calling and multi-agent handoffs, along with the REST APIs and Docker + GitHub Actions pipelines that cut deployment time by 50% for 100+ active users.',
+    'On my own time I build agentic systems with LangGraph and tool calling: a RAG agent that fact-checks its answers and cites the exact page behind every claim, and a reliability layer that stops voice agents from retrying unsafe actions. I test with pytest and use Claude Code and Codex every day, reviewing and testing everything they write before it ships.',
   ],
 
   stats: [
-    { value: '1.5 yrs', label: 'production Python backend' },
-    { value: '100+', label: 'active users served' },
-    { value: '50%', label: 'faster deployments (CI/CD)' },
+    { value: '1.5 yrs', label: 'production AI & backend' },
     { value: '~2 s', label: 'end-to-end voice latency' },
+    { value: '97.7%', label: 'correct page citations (RAG)' },
+    { value: '50%', label: 'faster deployments (CI/CD)' },
   ],
 
   experience: [
@@ -115,14 +117,15 @@ export const PORTFOLIO = {
   ],
 
   skills: [
-    // Same groups and order as "Areas of Expertise" on the resume.
+    // Grouped so each target role (AI, voice AI, backend) has its own block.
+    { group: 'AI agents & LLMs', items: ['Agentic AI', 'RAG', 'LLM APIs', 'Function / tool calling', 'Multi-agent systems', 'LangGraph', 'LangChain', 'Embeddings & vector search', 'Prompt engineering'] },
+    { group: 'Voice AI', items: ['LiveKit Agents', 'Real-time audio streaming', 'STT', 'TTS', 'VAD', 'OpenWakeWord', 'ElevenLabs', 'Sarvam AI'] },
     { group: 'Python & backend', items: ['Python (asyncio, type hints, OOP)', 'FastAPI', 'Flask', 'REST API design', 'Webhooks', 'API authentication', 'Error handling & retries'] },
-    { group: 'Databases', items: ['PostgreSQL', 'SQL', 'Supabase', 'Vector databases (Pinecone, ChromaDB)'] },
-    { group: 'Testing & debugging', items: ['pytest', 'Unit & integration testing', 'Regression testing', 'Debugging & root-cause analysis', 'Logging', 'Code review'] },
-    { group: 'AI-assisted development', items: ['Claude Code', 'Codex'] },
-    { group: 'Other languages', items: ['JavaScript', 'Node.js'] },
-    { group: 'DevOps & monitoring', items: ['Git', 'Docker', 'GitHub Actions', 'CI/CD', 'Kubernetes', 'AWS', 'Azure', 'OpenTelemetry', 'Grafana', 'Langfuse'] },
-    { group: 'AI / LLM', items: ['LLM APIs', 'Function / tool calling', 'RAG', 'LangChain', 'LangGraph', 'LiveKit Agents', 'STT', 'TTS', 'PyTorch', 'Transformers'] },
+    { group: 'Databases', items: ['PostgreSQL', 'SQL', 'Supabase', 'pgvector', 'Pinecone', 'ChromaDB'] },
+    { group: 'Machine learning', items: ['PyTorch', 'TensorFlow', 'Transformers', 'BERT', 'Fine-tuning (TTS, NER)'] },
+    { group: 'Testing & debugging', items: ['pytest', 'Unit & integration testing', 'Regression testing', 'Debugging & root-cause analysis', 'Profiling', 'Structured logging', 'Code review'] },
+    { group: 'DevOps & observability', items: ['Git', 'Docker', 'GitHub Actions', 'CI/CD', 'Kubernetes', 'AWS', 'Azure', 'OpenTelemetry', 'Grafana', 'Langfuse'] },
+    { group: 'Tools & other languages', items: ['Claude Code', 'Codex', 'n8n', 'JavaScript', 'Node.js'] },
   ],
 
   education: {

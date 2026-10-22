@@ -44,7 +44,7 @@ export default function App() {
 
   // Keep the document title in sync with the route.
   useEffect(() => {
-    document.title = isPortfolio ? 'M Karthikeya Reddy — Python Backend Engineer'
+    document.title = isPortfolio ? 'M Karthikeya Reddy — AI Engineer · Voice AI & Python Backend'
       : project ? `${project.short} · ${TABS.find((t) => t.id === tab).label} — Karthikeya Reddy`
         : 'AI Systems — Karthikeya Reddy';
   }, [isPortfolio, project, tab]);
